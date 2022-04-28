@@ -1,0 +1,61 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.7'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.online-study'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "2021.0.1")
+}
+
+dependencies {
+	implementation 'org.springframework.kafka:spring-kafka'
+
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-webflux-ui', version: '1.6.8'
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-webflux-core', version: '1.6.8'
+
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2' // jwt 사용
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+
+	implementation 'org.apache.commons:commons-lang3' // ApacheCommons 사용
+
+	implementation 'org.springframework.boot:spring-boot-starter-webflux' // WebFlux 사용
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator' // Acturator 사용
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client' // Eureka Client 사용
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc' // R2DBC 사용
+	implementation 'com.h2database:h2' // H2 사용
+	implementation 'io.r2dbc:r2dbc-h2' // R2DBC-H2 사용
+
+	compileOnly 'org.projectlombok:lombok' // Lombok 사용
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test' // Reactive 사용
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

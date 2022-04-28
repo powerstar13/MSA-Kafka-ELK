@@ -1,0 +1,48 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: Member Domain Server
+  r2dbc:
+    url: r2dbc:h2:mem:///msa;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
+    username: sa
+    password:
+    initialization-mode: always
+    port: 9093
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+
+eureka:
+  client:
+    service-url: # Eureka Server의 url이 들어간다.
+      defualtZone: http://localhost:8761/eureka/ # 유레카 클라이언트가 서비스를 등록할 때 주소를 지정하기 위해 사용
+    register-with-eureka: true # 유레카 서버에 본인 서비스를 등록할 건지 여부
+    fetch-registry: true # 유레카 서버로부터 서비스 목록을 로컬 캐시에 저장할 건지 여부
+
+logging:
+  level:
+    root: INFO
+    org.springframework.r2dbc: DEBUG
+    com:
+      netflix: # Eureka를 실행하지 않고 개발할 경우 OFF 설정하여 로그 생략 처리
+        eureka: OFF
+        discovery: OFF
+
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+
+msa:
+  client:
+    url:
+      gateway: http://localhost:8080 # gateway 주소
+
+jwt:
+  #BASE64 인코딩 : codestates-bithumb-msa-team-member-spring-boot-webflux-jwt-secret
+  secret: Y29kZXN0YXRlcy1iaXRodW1iLW1zYS10ZWFtLW1lbWJlci1zcHJpbmctYm9vdC13ZWJmbHV4LWp3dC1zZWNyZXQ=
+  accessExpires:  7200000 #2시간 ms
+  refreshExpires:  172800000 #2주 ms
+
