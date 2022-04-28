@@ -4,10 +4,10 @@
 
 ### [Kafka Broker Link](https://github.com/powerstar13/Kafka-msa-topic)
 Port: 9092
-### [Topic: 강의 오픈 - Producer Server Link](https://github.com/powerstar13/Kafka-msa-topic/KafkaLecture)
+### [Topic: 강의 오픈 - Producer Server Link](https://github.com/powerstar13/Kafka-msa-topic/tree/develop/KafkaLecture)
 Port: 8083
 - 강의 노출 설정 API 경로 --> /lecture/admin/show
-### [Topic: 강의 오픈 - Consumer Server Link](https://github.com/powerstar13/Kafka-msa-topic/KafkaMember)
+### [Topic: 강의 오픈 - Consumer Server Link](https://github.com/powerstar13/Kafka-msa-topic/tree/develop/KafkaMember)
 Port: 8081
 
 ```java
