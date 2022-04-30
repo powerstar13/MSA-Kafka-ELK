@@ -1,14 +1,14 @@
 package study.kafka.producer.presentation.handler;
 
-import study.kafka.producer.domain.model.lecture.Lecture;
-import study.kafka.producer.infrastructure.kafka.KafkaProducerService;
-import study.kafka.producer.application.lecture.LectureApplicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
+import study.kafka.producer.application.lecture.LectureApplicationService;
+import study.kafka.producer.domain.model.lecture.Lecture;
+import study.kafka.producer.infrastructure.kafka.KafkaProducerService;
 
 @Component
 @RequiredArgsConstructor
@@ -21,9 +21,7 @@ public class LectureAdminHandler {
     public Mono<ServerResponse> changeLectureShowYn(ServerRequest serverRequest) {
 
         Mono<Lecture> lectureMono = serverRequest.bodyToMono(Lecture.class)
-            .flatMap(request -> {
-                return lectureApplicationService.changeLectureShowYn(request);
-            })
+            .flatMap(lectureApplicationService::changeLectureShowYn)
             .doOnSuccess(lecture -> {
                 // Kafka Message 발행
                 kafkaProducerService.sendMessage(

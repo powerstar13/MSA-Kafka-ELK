@@ -15,7 +15,7 @@ spring:
     password:
     initialization-mode: always
   kafka:
-    consumer:
+    producer:
       bootstrap-servers: localhost:9092
 
 logging:

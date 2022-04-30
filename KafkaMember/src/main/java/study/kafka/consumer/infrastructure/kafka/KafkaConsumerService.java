@@ -17,7 +17,7 @@ public class KafkaConsumerService {
      * 강의 오픈 토픽 구독
      * @param message : 받은 메시지
      */
-    @KafkaListener(topics = "lecture-open-topic", groupId = "lecture-consumer-group")
+    @KafkaListener(id = "member", topics = "lecture-open-topic", groupId = "member-group")
     public void lectureOpenConsume(String message) {
         log.info(String.format("===== Consumed message >>> %s =====", message));
 
